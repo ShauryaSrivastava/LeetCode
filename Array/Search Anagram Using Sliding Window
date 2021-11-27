@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;				
+public class Program
+{
+	public static void Main()
+	{
+		string parent = "aabaabcaabaababa";
+		string s = "aaba";
+		int k = s.Length;
+		int i=0;
+		int j=0;
+		int count =0;
+		Dictionary<char, int> stringCount = new Dictionary<char, int>();
+		Dictionary<char, int> mvCount = new Dictionary<char, int>();
+		for(int n=0;n<k;n++)
+		{
+			if(stringCount.ContainsKey(s[n]))
+			{
+				stringCount[s[n]]++;
+			}else
+			{
+				stringCount.Add(s[n],1);
+			}
+		}
+		count = 0;
+		while(j < (parent.Length))
+		{
+			char ch = parent[j];
+			if(mvCount.ContainsKey(ch)){mvCount[ch]++;}
+			else {mvCount.Add(ch,1);}
+			
+			if(((j-i)+1) < k)
+			{
+				j++;
+			}
+			else
+			{
+				Console.WriteLine("ELSE");
+				if(Compare(stringCount,mvCount)){count++;}
+				
+				ch = parent[i];
+				if(mvCount.ContainsKey(ch)){
+					if(mvCount[ch] == 1){mvCount.Remove(ch);}
+					else{mvCount[ch]--;}
+				}
+				i++;j++;
+			}
+		}
+		//if(Compare(stringCount,mvCount)){count++;}
+		Console.WriteLine(count);
+		
+	}
+	public static bool Compare(Dictionary<char, int> ptr,Dictionary<char, int> source)
+	{
+		//Console.WriteLine("MethodCall");
+		if(ptr.Count != source.Count)
+		{
+			//Console.WriteLine("Count Fails");
+			return false;
+		}
+		
+		foreach (var key in source.Keys)
+        {
+            Console.Write(key);
+			Console.WriteLine(ptr[key]);
+        }
+		foreach (var key in ptr.Keys)
+        {
+            if (!source.ContainsKey(key)  || !ptr[key].Equals(source[key]))
+            {
+                return false;
+            }
+        }
+		return true;
+	}
+}
