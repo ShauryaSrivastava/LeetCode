@@ -1,0 +1,72 @@
+//Minimum Window Substring
+using System;
+using System.Collections.Generic;				
+public class Program
+{
+	public static void Main()
+	{
+		string s = "timetopractice";
+		string p = "toc";
+		var map1 = new Dictionary<char,int>();
+		var map2 = new Dictionary<char,int>();
+		int count =0;
+		int match=0;
+		int min = int.MaxValue;
+		bool l1 = false;
+		bool l2 = false;
+		int j=0;
+		int i=0;
+		foreach(var ch in p)
+		{
+			if(map1.ContainsKey(ch)){map1[ch]++;}
+			else{map1.Add(ch,1);}
+			match++;
+		}
+		
+		while(true)
+		{
+			l1 = l2 = false;
+			while(j<s.Length && count < match)
+			{
+				char ch = s[j];
+				if(map2.ContainsKey(ch)){map2[ch]++;}
+				else{map2.Add(ch,1);}
+				
+				if(map1.ContainsKey(ch) && map2[ch] <= map1[ch])
+				{
+					count++;
+				}
+				if(count == match){ break;}
+				j++;
+				l1 = true;
+			}
+			while(j>i && count == match)
+			{
+				//timetopractice
+				int _min = j-i+1;
+				min = Math.Min(_min,min);
+				char ch = s[i];
+				if(map2.ContainsKey(ch))
+				{
+					if(map2[ch] == 1){map2.Remove(ch);}
+					else{map2[ch]--;}
+				}
+				int _val = 0;
+				map2.TryGetValue(ch,out _val);
+				if(map1.ContainsKey(ch) && map1[ch]>_val)
+				{
+					count--;
+				}
+				i++;
+				l2 = true;
+			}
+			
+			if(!l1&!l2)
+			{
+				break;
+			}
+		}
+		Console.WriteLine(min);
+		
+	}
+}
