@@ -1,0 +1,51 @@
+using System;
+using System.Collections.Generic;				
+public class Program
+{
+	public static void Main()
+	{
+		string s ="MR John Smith   ";
+		int totalSpace=0;
+		foreach(var c in s)
+		{
+			if(c == ' '){totalSpace++;}
+		}
+		int Last = s.Length - 1;
+		int Start = 0;
+		while(Last >=0)
+		{
+			if(s[Last] == ' '){totalSpace--;}
+			else{break;}
+			Last--;
+		}
+		while(Start <= Last)
+		{
+			if(s[Start] == ' '){totalSpace--;}
+			else{break;}
+			Start++;
+		}
+		
+		int size_required = (Last-Start)+ 1 + (totalSpace*2);
+		char[] newstring = new char[size_required];
+		int i=0;
+		while(Start<=Last)
+		{
+			if(s[Start]==' ')
+			{
+				Console.WriteLine("space" + s[Start]);
+				Console.WriteLine(i);
+				newstring[i++] ='%';
+				Console.WriteLine(i);
+				newstring[i++] ='2';
+				Console.WriteLine(i);
+				newstring[i++] ='0';
+			}
+			else
+			{
+				newstring[i++]=s[Start];
+			}
+			Start++;
+		}
+		Console.WriteLine(String.Concat(newstring));
+	}
+}
