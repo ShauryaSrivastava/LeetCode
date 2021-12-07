@@ -13,8 +13,8 @@ public class Program
 		
 		while(j< chara.Length)
 		{
-			if(dic.ContainsKey(chara[j])){dic[chara[j]]++;}
-			else{dic.Add(chara[j],1);}
+		if(dic.ContainsKey(chara[j])){dic[chara[j]]++;}
+		else{dic.Add(chara[j],1);}
 			if(dic.Keys.Count == k){
 				max = max < (j-i+1) ? (j-i+1) : max;
 			}else if(dic.Keys.Count > k){
