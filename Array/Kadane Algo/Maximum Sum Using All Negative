@@ -1,0 +1,23 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		///Alter in Kadane Algorithm
+		/// Maximum sum when all are negative
+		int[] a = {-3, -4, -2, -3, -1, -7, -5};
+		int max = 0;
+		int sum=0;
+		int max_so_far = int.MinValue;
+		for(int i=0;i<a.Length;i++)
+		{
+			sum = Math.Max(a[i],sum+a[i]);
+			max = Math.Max(max,sum);
+			max_so_far = Math.Max(max_so_far,a[i]);
+		}
+		if(max ==0)
+		Console.WriteLine(max_so_far);
+		else{Console.WriteLine(max);}
+	}
+}
