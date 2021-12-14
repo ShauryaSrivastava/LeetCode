@@ -1,0 +1,24 @@
+LinkedList obj = new LinkedList(1);
+		var duplicate = obj.Add(1);
+		obj.Add(2);
+		obj.Add(3);
+		obj.Add(3,duplicate);
+		bool isCycle = false;
+		ListNode slow = obj.head;
+		ListNode fast = slow.next;
+		while(fast != null && fast.next != null)
+		{
+			if(slow == fast)
+			{
+				isCycle=true;
+				break;
+			}
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		if(isCycle)
+		{
+			Console.WriteLine("Cyclic");
+		}else{
+			Console.WriteLine("NOt Cyclic");
+		}
