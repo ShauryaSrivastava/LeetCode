@@ -1,0 +1,14 @@
+ListNode cur = obj.head;
+		ListNode prev=null;
+		ListNode next = cur;
+		while(cur != null)
+		{
+			next = cur.next;
+			
+			cur.next = prev;
+			prev = cur;
+			
+			cur = next;
+			
+		}
+		obj.head = prev;
