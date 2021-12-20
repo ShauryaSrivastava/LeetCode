@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	public static void Main()
+	{
+		// Maximum Area of Histogram
+		int[] height = {6, 2, 5, 4, 5, 1, 6};
+		int[] NSL = new int[height.Length];
+		int[] NSR = new int[height.Length];
+		Stack<Tuple<int, int>> holder = new Stack<Tuple<int, int>>();
+		int[] result = new int[height.Length];
+		//Nearest Smaller Element To Left
+		for(int i=0;i < height.Length;i++)
+		{
+			if(holder.Count>0)
+			{
+				while(holder.Count>0 && height[i]< holder.Peek().Item1)
+				{
+					holder.Pop();
+				}
+				NSL[i] = holder.Count > 0? holder.Peek().Item2 : -1;
+			}
+			else
+			{
+				NSL[i] = -1;
+			}
+			holder.Push(new Tuple<int,int>(height[i],i));
+		}
+		holder = new Stack<Tuple<int, int>>();
+		//Nearest Smaller Element To Right
+		for(int i=height.Length-1;i >=0 ;i--)
+		{
+			if(holder.Count>0)
+			{
+				while(holder.Count>0 && height[i]< holder.Peek().Item1)
+				{
+					holder.Pop();
+				}
+				NSR[i] = holder.Count > 0? holder.Peek().Item2 : 7;
+			}
+			else
+			{
+				NSR[i] = 7;
+			}
+			holder.Push(new Tuple<int,int>(height[i],i));
+		}
+		int max = int.MinValue;
+		for(int i=0;i< height.Length;i++)
+		{
+			int cal = NSR[i] - NSL[i] -1;
+			cal = cal*height[i];
+			max = Math.Max(cal,max);
+		}
+		Console.WriteLine(max);
+	}
+	
+}
