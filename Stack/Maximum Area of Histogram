@@ -16,7 +16,7 @@ public class Program
 		{
 			if(holder.Count>0)
 			{
-				while(holder.Count>0 && height[i]< holder.Peek().Item1)
+				while(holder.Count>0 && height[i]<= holder.Peek().Item1)
 				{
 					holder.Pop();
 				}
@@ -34,7 +34,7 @@ public class Program
 		{
 			if(holder.Count>0)
 			{
-				while(holder.Count>0 && height[i]< holder.Peek().Item1)
+				while(holder.Count>0 && height[i]<= holder.Peek().Item1)
 				{
 					holder.Pop();
 				}
