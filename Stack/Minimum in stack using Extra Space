@@ -1,0 +1,109 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	public static void Main()
+	{
+		//Getting Min Stack
+		//In time : O(n) and space O(n)
+		ExtraSpaceStack Stack = new ExtraSpaceStack();
+		ExtraSpaceStack Stack1 = new ExtraSpaceStack();
+		int[] arr = {18, 17, 29, 15, 16};
+		Stack.push(18);
+		Stack.push(17);
+		Stack.push(29);
+		Console.WriteLine(Stack.GetMin());
+		Stack.push(15);
+		Console.WriteLine(Stack.GetMin());
+		Stack.pop();
+		Stack.push(16);
+		Console.WriteLine(Stack.GetMin());
+		Stack.pop();
+		Console.WriteLine(Stack.GetMin());
+	}
+	public class WithoutExtraSpaceStack
+	{
+		Stack<int> M = new Stack<int>();
+		Stack<int> S = new Stack<int>();
+		public void push(int num)
+		{
+			if (M.Count == 0)
+			{
+				M.Push(num);
+				S.Push(num);
+			}
+			else
+			{
+				M.Push(num);
+				if (num <= S.Peek())
+				{
+					S.Push(num);
+				}
+			}
+		}
+
+		public int GetMin()
+		{
+			if (S.Count == 0)
+				return -1;
+			return S.Peek();
+		}
+
+		public int pop()
+		{
+			if (M.Count == 0)
+				return -1;
+			int popvalue = M.Pop();
+			if (popvalue == S.Peek())
+			{
+				S.Pop();
+			}
+
+			return popvalue;
+		}
+	}
+	// With Extra Space //
+	public class ExtraSpaceStack
+	{
+		Stack<int> M = new Stack<int>();
+		Stack<int> S = new Stack<int>();
+		public void push(int num)
+		{
+			if (M.Count == 0)
+			{
+				M.Push(num);
+				S.Push(num);
+			}
+			else
+			{
+				M.Push(num);
+				if (num <= S.Peek())
+				{
+					S.Push(num);
+				}
+			}
+		}
+
+		public int GetMin()
+		{
+			if (S.Count == 0)
+				return -1;
+			return S.Peek();
+		}
+
+		public int pop()
+		{
+			if (M.Count == 0)
+				return -1;
+			int popvalue = M.Pop();
+			if (popvalue == S.Peek())
+			{
+				S.Pop();
+			}
+
+			return popvalue;
+		}
+	}
+	
+}
