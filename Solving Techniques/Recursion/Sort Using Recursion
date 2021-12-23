@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
+public class Program
+{
+	public static void Main()
+	{
+		List<int> arr = new List<int>()
+		{1, 0, 5,2};
+		Sort(arr);
+		Console.WriteLine(JsonConvert.SerializeObject(arr));
+	}
+
+	public static int Sort(List<int> arr)
+	{
+		Console.WriteLine("----------------");
+		Console.WriteLine(arr.Count);
+		if (arr.Count == 1)
+		{
+			Console.WriteLine("Not Return");
+			return -1;
+		}
+		Console.WriteLine(JsonConvert.SerializeObject(arr));
+		int val = arr[arr.Count - 1];
+		arr.RemoveAt(arr.Count - 1);
+		Console.WriteLine(JsonConvert.SerializeObject(val));
+		Console.WriteLine(JsonConvert.SerializeObject(arr));
+		Console.WriteLine("End Reached");
+		Sort(arr);
+		Insert(arr,val);
+		return -1;
+	}
+
+	public static void Insert(List<int> arr, int val)
+	{
+		if (arr.Count == 0 || arr[arr.Count - 1] <= val)
+		{
+			arr.Add(val);
+			return;
+		}
+
+		int h = arr[arr.Count - 1];
+		arr.RemoveAt(arr.Count - 1);
+		Insert(arr, val);
+		arr.Add(h);
+	}
+}
