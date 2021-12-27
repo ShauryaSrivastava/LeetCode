@@ -1,0 +1,46 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		//Input : abc
+		//Output : Subset of abc in a_b_c
+		string subset = "abc";
+		//"","a","b","ab"
+		string ch = Convert.ToString(subset[0]);
+		subset = subset.Remove(0,1);
+		PermutationWithSpace(subset,ch);
+	}
+	public static void Solve(string input,string output)
+	{
+		if(input.Length == 0)
+		{
+			//Console.WriteLine(output);
+			return;
+		}
+		string op1 = output;
+		string op2 = output;
+		
+		op2 = string.Concat(op2,input[0]);
+		Console.WriteLine(op1);
+		Console.WriteLine(op2);
+		input = input.Remove(0,1);
+		//Console.WriteLine(input);
+		Solve(input,op1);
+		Solve(input,op2);
+	}
+	public static void PermutationWithSpace(string input,string output)
+	{
+		if(input.Length == 0)
+		{
+			Console.WriteLine(output);
+			return;
+		}
+		string op1 = String.Concat(output,"_",input[0]);
+		string op2 = String.Concat(output,input[0]);
+		input = input.Remove(0,1);
+		PermutationWithSpace(input,op1);
+		PermutationWithSpace(input,op2);
+	}
+}
