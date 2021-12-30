@@ -1,0 +1,24 @@
+public class Solution {
+    public IList<string> GenerateParenthesis(int n) {
+        List<string> output = new List<string>();
+        GeneratePra(n,n,"",output);
+        return output;
+    }
+    
+    public static void GeneratePra(int open,int close,string output,List<string> list)
+    {
+        if(close == 0)
+        {
+            list.Add(output);
+            return;
+        }
+        if(open>0)
+        {
+            GeneratePra(open-1,close,output+"(",list);
+        }
+        if(close > open)
+        {
+            GeneratePra(open,close-1,output+")",list); 
+        }
+    }
+}
