@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	//Kth largest Element
+	public static void Main()
+	{
+		//PriorityQueue<int, int> MaxHeap = new PriorityQueue<int, int>(new MaxHeapComparer()); //Max Heap
+		PriorityQueue<int, int> MinHeap = new PriorityQueue<int, int>();//MIN Heap
+		int[] arr = {6,5,3,2,8,10,9};
+		//2,3,5,6,8,9,10
+		int k = 4;
+
+		//Min Heap Implementation
+		foreach(var x in arr)
+		{
+			MinHeap.Enqueue(x,x);
+			if(MinHeap.Count> k)
+			{
+				MinHeap.Dequeue();
+			}
+		}
+		var element = MinHeap.Peek();
+		Console.WriteLine($"{k}th element : {element}");
+	}
+
+	class MaxHeapComparer : IComparer<int>
+	{
+		public int Compare(int element1, int element2)
+		{
+			if (element1 == element2) //If both are fancy (Or both are not fancy, return 0 as they are equal)
+			{
+				//Console.WriteLine($" 0 : element1 :{element1} && element2 : {element2}");
+				return 0;
+			}
+			else if (element1 > element2) //if element1 is greater than element2 then put element 2 on above element one
+			{
+				//Console.WriteLine($"-1 : element1 :{element1} && element2 : {element2}");
+				return -1;
+			}
+			else //Otherwise it must be that B is fancy (And A is not), so return 1
+			{
+				//Console.WriteLine($" 1 : element1 :{element1} && element2 : {element2}");
+				return 1;
+			}
+		}
+	}
+}
