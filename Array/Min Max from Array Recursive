@@ -1,0 +1,50 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		int[] arr = {1000, 11, 445, 1, 330, 3000};
+		var t = findMinMax(arr,0,arr.Length-1);
+		Console.WriteLine($"Max : {t.MAX}, Min : {t.MIN}");
+	}
+	public class Pair{
+	public int MIN {get;set;}
+	public int MAX {get;set;}
+	}
+	
+	public static Pair findMinMax(int[] arr,int low,int high)
+	{
+		//Console.WriteLine($"L:{low} : H : {high}");
+		Pair output = new Pair();
+		Pair mml = new Pair();
+		Pair mmlr = new Pair();
+		if(low == high)
+		{
+			Console.WriteLine($"L:{low} : H : {high}");
+			output.MAX = output.MIN = arr[low];
+			return output;
+		}
+		if(high == low+1)
+		{
+			if(arr[high] < arr[low])
+			{
+				output.MIN = arr[high];
+				output.MAX = arr[low];
+			}
+			else{
+			    output.MIN = arr[low];
+				output.MAX = arr[high];
+			}
+			return output;
+		}
+		int mid = (low + high)/2;
+		mmlr = findMinMax(arr,mid,high);
+		mml = findMinMax(arr,low,mid-1);
+		Console.WriteLine($"R:{mmlr.MIN} : L : {mml.MIN} ");
+		Console.WriteLine($"R:{mmlr.MAX} : L : {mml.MAX} ");
+		output.MIN = Math.Min(mmlr.MIN,mml.MIN);
+		output.MAX = Math.Max(mmlr.MAX,mml.MAX);
+		return output;
+	}
+}
