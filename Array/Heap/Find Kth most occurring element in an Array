@@ -3,8 +3,7 @@ using System.Collections.Generic;
 
 public class Program
 {
-	//Find Kth most occurring element in an Array
-	//https://www.geeksforgeeks.org/find-kth-most-occurring-element-in-an-array/
+	//https://leetcode.com/problems/k-closest-points-to-origin/
 	public static void Main()
 	{
 		//PriorityQueue<int, int> MaxHeap = new PriorityQueue<int, int>(new MaxHeapComparer()); //Max Heap
