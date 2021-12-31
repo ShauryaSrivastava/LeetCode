@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	public static void Main()
+	{
+		//Kth smallest element
+		int[] arr = {7,10,4,3,20,15};
+		int k = 3;
+		PriorityQueue<int, int> bankQueue = new PriorityQueue<int, int>(new MaxHeapComparer());
+		//PriorityQueue<int, int> bankQueue = new PriorityQueue<int, int>();//MIN Heap
+		//Max Heap Implementation
+		foreach(var x in arr)
+		{
+			bankQueue.Enqueue(x,x);
+			if(bankQueue.Count> k)
+			{
+				bankQueue.Dequeue();
+			}
+		}
+		bankQueue.Peek();
+		//
+		Console.WriteLine($"{k}th element : {bankQueue.Peek()}");
+	}
+
+	class MaxHeapComparer : IComparer<int>
+	{
+		public int Compare(int element1, int element2)
+		{
+			if (element1 == element2) //If both are fancy (Or both are not fancy, return 0 as they are equal)
+			{
+				//Console.WriteLine($" 0 : element1 :{element1} && element2 : {element2}");
+				return 0;
+			}
+			else if (element1 > element2) //if element1 is greater than element2 then put element 2 on above element one
+			{
+				//Console.WriteLine($"-1 : element1 :{element1} && element2 : {element2}");
+				return -1;
+			}
+			else //Otherwise it must be that elemet 1 is greater than element 2, so return 1
+			{
+				//Console.WriteLine($" 1 : element1 :{element1} && element2 : {element2}");
+				return 1;
+			}
+		}
+	}
+}
