@@ -1,0 +1,80 @@
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+		var _temp4 = new ListNode(4);
+		var _temp3 = new ListNode(3, _temp4);
+		var _temp1 = new ListNode(1, _temp3);
+		var _temp44 = new ListNode(4);
+		var _temp2 = new ListNode(2, _temp44);
+		var _temp11 = new ListNode(1, _temp2);
+		ListNode head1 = _temp1;
+		ListNode head2 = _temp11;
+		ListNode next = MergeTwoLists(_temp1, _temp11);
+		while(next != null)
+		{
+			Console.Write("==>");
+			Console.WriteLine(next.val);
+			next = next.next;
+		}
+	}
+
+	public static ListNode Add(ListNode next, int val)
+	{
+		var _temp = new ListNode(val, next);
+		return _temp;
+	}
+
+	public static ListNode MergeTwoLists(ListNode list1, ListNode list2)
+	{
+		ListNode response = null;
+		if(list1 != null){Console.WriteLine("l1");}
+		if(list2 != null){Console.WriteLine("l2");}
+		ListNode i = list1;
+		ListNode j = list2;
+		ListNode head = new ListNode(0);
+		ListNode runner = head;
+		while (i != null && j != null)
+		{
+			Console.WriteLine("In");
+			Console.WriteLine(i.val);
+			Console.WriteLine(j.val);
+			if (i.val > j.val)
+			{
+				var next = new ListNode(j.val);
+				Console.Write("j=>");
+				Console.WriteLine(j);
+				runner.next = next;
+				j = j.next;
+			}
+			else
+			{
+				var next = new ListNode(i.val);
+				runner.next = next;
+				i = i.next;
+			}
+
+			runner = runner.next;
+		}
+
+		if (i != null)
+			runner = i;
+		if (j != null)
+			runner = j;
+		response = head.next;
+		return response;
+	}
+}
+
+public class ListNode
+{
+	public int val;
+	public ListNode next;
+	public ListNode(int val = 0, ListNode next = null)
+	{
+		this.val = val;
+		this.next = next;
+	}
+}

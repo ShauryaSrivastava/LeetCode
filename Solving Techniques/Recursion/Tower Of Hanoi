@@ -1,0 +1,20 @@
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+		TOH(3,1,2,3);
+	}
+
+	public static void TOH(int n, int t1id, int t2id, int t3id)
+	{
+		Console.WriteLine("N:" + n.ToString() + " Source ID " + t1id.ToString() + " Destination ID " + t2id.ToString() + " Aux " + t3id.ToString());
+		if(n==0)return;
+		TOH(n-1,t1id,t3id,t2id);
+		Console.WriteLine("N:" + n.ToString() + "[" + t1id.ToString() + " => " + t2id.ToString() + "]");
+		TOH(n-1,t3id,t2id,t1id);
+			
+			
+	}
+}

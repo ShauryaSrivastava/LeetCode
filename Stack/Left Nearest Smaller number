@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;				
+public class Program
+{
+	public static void Main()
+	{
+		//Stack 
+		//Nearest Smallest Element To Left
+		int[] arr = {4,5,2,10,8};
+		Stack<int> nums = new Stack<int>();
+		int[] res = new int[arr.Length];
+		int k=0;
+		for(int i=0;i< arr.Length;i++)
+		{
+			if(nums.Count >0)
+			{
+				while(nums.Count>0 && arr[i]<nums.Peek())
+				{
+					nums.Pop();
+				}
+				int num = nums.Count>0? nums.Peek():-1;
+				res[k] = num;
+			}
+			else
+			{
+				res[k] = -1;
+			}
+			nums.Push(arr[i]);
+			k++;
+		}
+		for(int i=0;i<arr.Length;i++)
+		{
+			Console.WriteLine(res[i]);
+		}
+		
+	}
+}

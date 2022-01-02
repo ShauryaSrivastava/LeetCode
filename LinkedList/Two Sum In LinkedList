@@ -1,0 +1,120 @@
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+		/*LinkedList obj = new LinkedList(9);
+		obj.Add(9);
+		obj.Add(9);
+		obj.Add(9);
+		obj.Add(9);
+		obj.Add(9);
+		obj.Add(9);
+		LinkedList obj1 = new LinkedList(9);
+		obj1.Add(9);
+		obj1.Add(9);
+		obj1.Add(9);*/
+		
+		//
+		LinkedList obj = new LinkedList(2);
+		obj.Add(4);
+		obj.Add(3);
+		LinkedList obj1 = new LinkedList(5);
+		obj1.Add(6);
+		obj1.Add(4);
+		//
+		
+		int left=0;
+		var node1 = obj.head;
+		var node2 = obj1.head;
+		var newlist = new LinkedList(0);
+		while(node1 != null || node2 != null || left==1)
+		{
+			int num1 =0;
+			int num2 =0;
+			//Calculation
+			if(node1!= null)
+			{
+				num1 = node1.val;
+				node1= node1.next;
+			}
+			if(node2 != null)
+			{
+				num2 = node2.val;
+				node2= node2.next;
+			}
+			int sum = num1 + num2 + left;
+			left = sum/10;
+			newlist.Add(sum%10);
+			//
+		}
+		newlist.head = newlist.head.next;
+		var temp = newlist.head;
+		while(temp != null)
+		{
+			Console.Write(temp.val);
+			temp = temp.next;
+		}
+	}
+
+	public static void AlternativeMerge(ListNode node1, ListNode node2)
+	{
+		ListNode nodenext1 = null;
+		ListNode nodenext2 = null;
+		while (node1 != null && node2 != null)
+		{
+			nodenext1 = node1.next;
+			node1.next = node2;
+			node1 = nodenext1;
+			nodenext2 = node2.next;
+			node2.next = nodenext1;
+			node2 = nodenext2;
+		}
+	}
+}
+
+public class ListNode
+{
+	public int val;
+	public ListNode next;
+	public ListNode(int val = 0, ListNode next = null)
+	{
+		this.val = val;
+		this.next = next;
+	}
+}
+
+public class LinkedList
+{
+	public ListNode head;
+	public LinkedList(int val)
+	{
+		head = new ListNode(val);
+	}
+
+	public ListNode Add(int val, ListNode next = null)
+	{
+		ListNode node = head;
+		while (node.next != null)
+		{
+			node = node.next;
+		}
+
+		if (next == null)
+			node.next = new ListNode(val);
+		else
+			node.next = new ListNode(val, next);
+		return node.next;
+	}
+
+	public void print()
+	{
+		ListNode node = head;
+		while (node != null)
+		{
+			Console.WriteLine(node.val);
+			node = node.next;
+		}
+	}
+}

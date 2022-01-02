@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+public class Program
+{
+	public static void Main()
+	{
+		string s = "abaccaba";
+		int k=2;
+		int max = int.MinValue;
+		int i=0;
+		int si,sj;
+		si=sj=0;
+		int j=0;
+		var map = new Dictionary<char,int>();
+		while(j< s.Length)
+		{
+			char _cur = s[j];
+			if(map.ContainsKey(_cur)){map[_cur]++;}
+			else{map.Add(_cur,1);}
+			if(map.Keys.Count == k)
+			{
+				int cmax = j - i +1;
+				 if(cmax > max){
+					max = cmax;
+					si=i;
+					 sj=j;
+				 }
+			}
+			else if(map.Keys.Count > k)
+			{
+				while(map.Keys.Count > k)
+				{
+					if(map.ContainsKey(s[i]) && map[s[i]]==1){map.Remove(s[i]);}
+					else if(map.ContainsKey(s[i]) && map[s[i]]>1){map[s[i]]--;}
+					i++;
+				}
+			}
+			j++;
+		}
+		Console.WriteLine(max);
+		Console.WriteLine(si);
+		Console.WriteLine(sj);
+		
+	}
+}

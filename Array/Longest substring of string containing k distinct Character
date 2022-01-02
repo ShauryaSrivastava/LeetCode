@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;				
+public class Program
+{
+	public static void Main()
+	{
+		string chara = "aabacbebebe";
+		int k=3;
+		int i=0;
+		int j=0;
+		int max=0;
+		Dictionary<char,int> dic = new Dictionary<char,int>();
+		
+		while(j< chara.Length)
+		{
+			if(dic.ContainsKey(chara[j])){dic[chara[j]]++;}
+			else{dic.Add(chara[j],1);}
+			if(dic.Keys.Count == k){
+				max = max < (j-i+1) ? (j-i+1) : max;
+			}else if(dic.Keys.Count > k){
+				while(dic.Keys.Count > k)
+				{
+					if(dic.ContainsKey(chara[i]))
+					{
+						if(dic[chara[i]] == 1){dic.Remove(chara[i]);}
+						else{dic[chara[i]]--;}
+						i++;
+					}
+				}
+			}
+			j++;
+		}
+		Console.WriteLine(max);
+	}
+}

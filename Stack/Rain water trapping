@@ -1,0 +1,98 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	public static void Main()
+	{
+		//Rain Water Harvesting 
+		int[] arr = {3,0,0,2,0,4};
+		int[] NSL = new int[arr.Length];
+		int[] RSL = new int[arr.Length];
+		int max = int.MinValue;
+		for(int i=0;i<arr.Length;i++)
+		{
+			max = Math.Max(arr[i],max);
+			NSL[i]=max;
+		}
+		max = int.MinValue;
+		for(int i=arr.Length-1;i>=0;i--)
+		{
+			max = Math.Max(arr[i],max);
+			RSL[i]=max;
+		}
+		int sum=0;
+		for(int i=0;i< arr.Length;i++)
+		{
+			int min = Math.Min(NSL[i],RSL[i]);
+			int cal = min - arr[i];
+			sum = cal>0?sum+cal : sum;
+		}
+		Console.WriteLine(sum);
+	}
+
+	public static int MAH(int[] arr, int size)
+	{
+		Console.WriteLine("-------------");
+		foreach(var x in arr)
+		{
+			Console.Write(x);
+		}
+		Console.WriteLine("-------------");
+		int[] height = arr;
+		int[] NSL = new int[height.Length];
+		int[] NSR = new int[height.Length];
+		Stack<Tuple<int, int>> holder = new Stack<Tuple<int, int>>();
+		int[] result = new int[height.Length];
+		//Nearest Smaller Element To Left
+		for (int i = 0; i < height.Length; i++)
+		{
+			if (holder.Count > 0)
+			{
+				while (holder.Count > 0 && height[i] <= holder.Peek().Item1)
+				{
+					holder.Pop();
+				}
+
+				NSL[i] = holder.Count > 0 ? holder.Peek().Item2 : -1;
+			}
+			else
+			{
+				NSL[i] = -1;
+			}
+
+			holder.Push(new Tuple<int, int>(height[i], i));
+		}
+
+		holder = new Stack<Tuple<int, int>>();
+		//Nearest Smaller Element To Right
+		for (int i = height.Length - 1; i >= 0; i--)
+		{
+			if (holder.Count > 0)
+			{
+				while (holder.Count > 0 && height[i] <= holder.Peek().Item1)
+				{
+					holder.Pop();
+				}
+
+				NSR[i] = holder.Count > 0 ? holder.Peek().Item2 : size;
+			}
+			else
+			{
+				NSR[i] = size;
+			}
+
+			holder.Push(new Tuple<int, int>(height[i], i));
+		}
+
+		int max = int.MinValue;
+		for (int i = 0; i < height.Length; i++)
+		{
+			int cal = NSR[i] - NSL[i] - 1;
+			cal = cal * height[i];
+			max = Math.Max(cal, max);
+		}
+		Console.WriteLine(max);
+		return (max);
+	}
+}

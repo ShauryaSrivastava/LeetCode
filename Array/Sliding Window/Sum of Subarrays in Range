@@ -1,0 +1,43 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		int[] arr = {1,1, 4, 6};
+		int j =0;
+		int i=0;
+		int l = 5;
+		int r = 11;
+		int sum =0;
+		int totalCount=0;
+		while(j<arr.Length)
+		{
+			sum+=arr[j];
+			Console.WriteLine(sum);
+			if(sum> l && sum < r)
+			{
+				totalCount++;
+				while(i < j)
+				{
+					sum-=arr[i];
+					if(sum> l && sum < r){
+					  totalCount++;
+					}
+					i++;
+				}
+			}
+			else if(sum > r)
+			{
+				while(i<j)
+				{
+					sum-=arr[i];
+					if(sum> l && sum < r){totalCount++;}
+					i++;
+				}
+			}
+			j++;
+		}
+		Console.WriteLine(totalCount);
+	}
+}

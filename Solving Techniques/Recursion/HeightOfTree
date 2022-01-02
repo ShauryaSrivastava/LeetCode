@@ -1,0 +1,68 @@
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+		Node head = new Node()
+		{val = 0, right = new Node()
+		{val = 1 ,right = new Node(){val =3}}, left = new Node()
+		{val = 2}};
+		var temp = head;
+		Console.WriteLine(findHeightOfTree(temp));
+	}
+
+	public static int findHeight(ListNode head, int height)
+	{
+		if (head == null)
+		{
+			return height;
+		}
+
+		return findHeight(head.next, ++height);
+	}
+	public static int findHeightOfTree(Node head)
+	{
+		int right=0;
+		int left=0;
+		if(head.right != null)
+		{
+			right += findHeightOfTree(head.right);
+		}
+		if(head.left != null)
+		{
+			left += findHeightOfTree(head.left);
+		}
+		Console.WriteLine("-----------------");
+		Console.WriteLine(head.val);
+		Console.WriteLine("Right=> " + right.ToString());
+		Console.WriteLine("Left=> " + left.ToString());
+		Console.WriteLine("-----------------");
+		int max = Math.Max(right,left);
+		return max + 1;
+	}
+
+	public class ListNode
+	{
+		public int val;
+		public ListNode next;
+		public ListNode(int val = 0, ListNode next = null)
+		{
+			this.val = val;
+			this.next = next;
+		}
+	}
+
+	public class Node
+	{
+		public int val;
+		public Node right;
+		public Node left;
+		public Node(int val = 0, Node right = null, Node left = null)
+		{
+			this.val = val;
+			this.right = right;
+			this.left = left;
+		}
+	}
+}

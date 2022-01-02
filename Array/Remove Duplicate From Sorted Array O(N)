@@ -1,0 +1,51 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		int[] nums = {1,1,2,2,4,4,4,4,4};
+		RemoveDuplicate(nums); // Using Additional Space
+		RemoveDuplicatesUsingTwoPointer(nums);// Using two pointer approach without using additional spaces
+	}
+	public static int RemoveDuplicate(int[] nums)
+	{
+		int len = nums.Length;
+		int[] Corrected = new int[len]; // Using Additional SPACE
+		int j=0;
+		int i=0;
+		for(i=0;i<len-1;i++)
+		{
+			//1,2,3
+			Console.Write(nums[i]);
+			Console.Write(nums[i+1]);
+			Console.WriteLine();
+			if(nums[i] != nums[i+1])
+			{
+				//Console.Write(nums[i]);
+				Corrected[j++] = nums[i];
+			}
+		}
+		Corrected[j++] = nums[len-1];
+		Console.WriteLine("");
+		foreach(var num in Corrected)
+		Console.WriteLine(num);
+		return 0;
+	}
+	// Two Pointer Approch Without Using Additional Space
+	public static int RemoveDuplicatesUsingTwoPointer(int[] nums) 
+	{
+		int index = 0;
+		int len = nums.Length;
+		for(int i=1;i< len;i++)
+		{
+			//int[] nums = {1,1,2,2,4,4,4,4,4};
+			if(nums[index] != nums[i])
+			{
+				nums[++index] = nums[i];
+			}
+		}
+		return index;
+	}
+	
+}

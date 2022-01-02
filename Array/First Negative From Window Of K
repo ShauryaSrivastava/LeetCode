@@ -1,0 +1,40 @@
+using System;
+using System.Collections;	
+public class Program
+{
+	public static void Main()
+	{
+		int[] array = {12,-3,-7,8,15,-1,28,29,30};
+		var q = new Queue();
+		int i=0;
+		int j=0;
+		int k=3;
+		while(j< array.Length)
+		{
+			if(array[j]<0)
+			{
+				q.Enqueue(array[j]);
+			}
+			if(j-i+1 < k)
+			{
+				j++;
+			}
+			else
+			{
+				if(q.Count == 0)
+				{
+					Console.WriteLine(0);
+				}else
+				{
+					Console.WriteLine(q.Peek());
+				}
+				if(array[i] < 0)
+				{
+					q.Dequeue();
+				}
+				i++;
+				j++;
+			}
+		}
+	}
+}

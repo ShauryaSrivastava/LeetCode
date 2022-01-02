@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+public class Program
+{
+	public static void Main()
+	{
+		LinkedList obj = new LinkedList(12);
+		obj.Add(11);
+		obj.Add(12);
+		obj.Add(21);
+		obj.Add(41);
+		obj.Add(43);
+		obj.Add(21);
+		var start = obj.head;
+		var prev = obj.head;
+		Dictionary<int,bool> dic = new Dictionary<int,bool>();
+		while(start!= null)
+		{
+			if(!dic.ContainsKey(start.val)){
+				dic.Add(start.val,true);
+				prev = start;
+				start = start.next;
+			}
+			else
+			{
+				prev.next = start.next;
+				start = prev.next;
+			}	
+		}
+		obj.print();
+		
+	}
+}
+
+public class ListNode
+{
+	public int val;
+	public ListNode next;
+	public ListNode(int val = 0, ListNode next = null)
+	{
+		this.val = val;
+		this.next = next;
+	}
+}
+
+public class LinkedList
+{
+	public ListNode head;
+	public LinkedList(int val)
+	{
+	 head = new ListNode(val);
+	}
+	public ListNode  Add(int val,ListNode next = null)
+	{
+		ListNode node = head;
+		while(node.next != null){node = node.next;}
+		if(next == null)
+		node.next = new ListNode(val);
+		else
+		node.next = new ListNode(val,next);
+		return node.next;
+	}
+	public void print()
+	{
+		ListNode node = head;
+		while(node != null)
+		{ Console.WriteLine(node.val); 
+		 node = node.next;
+		}
+	}
+	
+}

@@ -1,0 +1,25 @@
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+	//Kth Place Grammer
+		Console.WriteLine(Grammar(4,5));
+	}
+
+	public static int Grammar(double n, double k)
+	{
+		if (n == 1 || k == 1)
+			return 0;
+		double mid = (Math.Pow(2, n - 1)) / 2;
+		if (k <= mid)
+		{
+			return Grammar(n - 1, k);
+		}
+		else
+		{
+			return Grammar(n - 1, k - mid) == 0? 1 : 0;
+		}
+	}
+}

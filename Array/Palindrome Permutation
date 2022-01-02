@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;			
+public class Program
+{
+	public static void Main()
+	{
+		//Palidrome Permutation
+		string s = "abc";
+		var dic = new Dictionary<char,int>();
+		bool isOdd = false;
+		bool notPalidrom = false;
+		foreach(var ch in s)
+		{
+			int count =0;
+			dic.TryGetValue(ch,out count);
+			if(count == 0)
+			{
+				dic.Add(ch,1);
+			}else{
+			    count++;
+				dic[ch]=count;
+			}
+		}
+		foreach(var key in dic.Keys)
+		{
+			if(dic[key]%2!=0)
+			{
+				if(isOdd){notPalidrom = true; break;}
+				else{isOdd = true;}
+			}	
+		}
+		if(notPalidrom)
+		{
+			Console.WriteLine("NP");
+		}
+		else{Console.WriteLine("P");}
+		
+	}
+}

@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	public static void Main()
+	{
+		//Reverse Stack
+		Stack<int> arr = new Stack<int>();
+		arr.Push(1);
+		arr.Push(2);
+		arr.Push(3);
+		foreach (var x in arr)
+		{
+		//Console.WriteLine(x);
+		}
+
+		ReverseStack(arr);
+		foreach (var x in arr)
+		{
+			Console.WriteLine(x);
+		}
+	}
+
+	public static void ReverseStack(Stack<int> arr)
+	{
+		if (arr.Count == 1)
+			return;
+		var _top = arr.Peek();
+		arr.Pop();
+		ReverseStack(arr);
+		insert(arr, _top);
+	}
+
+	public static void insert(Stack<int> arr, int element)
+	{
+		if (arr.Count == 0)
+		{
+			arr.Push(element);
+			return;
+		}
+
+		var _top = arr.Pop();
+		insert(arr, element);
+		arr.Push(_top);
+	}
+}

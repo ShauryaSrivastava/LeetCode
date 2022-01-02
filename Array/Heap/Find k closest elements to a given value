@@ -1,0 +1,53 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	//Find k closest elements to a given value
+	//https://www.geeksforgeeks.org/find-k-closest-elements-given-value/
+	public static void Main()
+	{
+		PriorityQueue<int, int> MaxHeap = new PriorityQueue<int, int>(new MaxHeapComparer()); //Max Heap
+		//PriorityQueue<int, int> MinHeap = new PriorityQueue<int, int>(); //MIN Heap
+		int[] arr = {12, 16, 22, 30, 35, 39, 42, 45, 48, 50, 53, 55, 56};
+		int k = 4;
+		int x = 35;
+		//Using MaxHeap
+		foreach (var element in arr)
+		{
+			int gap = Math.Abs(x - element);
+			Console.WriteLine($"element : {element} : gap : {gap}");
+			MaxHeap.Enqueue(element, gap);
+			if (MaxHeap.Count > (k + 1))
+			{
+				MaxHeap.Dequeue();
+			}
+		}
+		while (MaxHeap.TryDequeue(out int element, out int priority))
+		{
+			Console.WriteLine($"Closest Element Are {element}");
+		}
+	}
+
+	class MaxHeapComparer : IComparer<int>
+	{
+		public int Compare(int element1, int element2)
+		{
+			if (element1 == element2) //If both are fancy (Or both are not fancy, return 0 as they are equal)
+			{
+				//Console.WriteLine($" 0 : element1 :{element1} && element2 : {element2}");
+				return 0;
+			}
+			else if (element1 > element2) //if element1 is greater than element2 then put element 2 on above element one
+			{
+				//Console.WriteLine($"-1 : element1 :{element1} && element2 : {element2}");
+				return -1;
+			}
+			else //Otherwise it must be that B is fancy (And A is not), so return 1
+			{
+				//Console.WriteLine($" 1 : element1 :{element1} && element2 : {element2}");
+				return 1;
+			}
+		}
+	}
+}

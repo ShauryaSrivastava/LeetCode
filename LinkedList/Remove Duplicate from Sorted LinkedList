@@ -1,0 +1,17 @@
+LinkedList obj = new LinkedList(1);
+		obj.Add(1);
+		obj.Add(2);
+		obj.Add(3);
+		obj.Add(3);
+		//obj.print();
+		ListNode temp = obj.head;
+		while(temp.next != null)
+		{
+			if(temp.val == temp.next.val)
+			{
+				temp.next = temp.next.next;
+			}
+			else{
+				temp = temp.next;
+			}
+		}

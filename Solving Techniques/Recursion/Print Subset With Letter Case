@@ -1,0 +1,43 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		
+    //INPUT : a1b2
+    
+    //OUTPUT
+    //a1b2
+    //a1B2
+    //A1b2
+    //A1B2
+		string chara = "a1b2";
+    Solve(chara,"");
+	}
+	public static void Solve(string input,string output)
+	{
+		if(input.Length == 0)
+		{
+			Console.WriteLine(output);
+			return;
+		}
+		
+		string s1 = output;
+		string s2 = output;
+		int val;
+		if(int.TryParse(input[0].ToString(),out val))
+		{
+			s1 = string.Concat(s1,input[0]);
+			input = input.Remove(0,1);
+			Solve(input,s1);
+		}else
+		{
+			s1 = string.Concat(s1,char.ToLower(input[0]));
+			s2 = string.Concat(s2,char.ToUpper(input[0]));
+			input = input.Remove(0,1);
+		    Solve(input,s1);
+			Solve(input,s2);
+		}
+	}
+}

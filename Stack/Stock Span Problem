@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	public static void Main()
+	{
+		//Stack 
+		//Stock Span Problem
+		//Find Greater To The Right
+		//Steps To Follow 
+		//1. Find All Greater for each on the left side
+		//2. Store Index of the element in array 
+		//3. use stored index to calculate right greatest from left
+		
+		int[] arr = {100, 80, 60, 70, 60, 75, 85};
+		Stack<Tuple<int, int>> nums = new Stack<Tuple<int, int>>();
+		int[] greaterHolder = new int[arr.Length];
+		int[] count = new int[arr.Length];
+		int[] res = new int[arr.Length];
+		int k = 0;
+		//finding Greater to left
+		for (int i = 0; i < arr.Length; i++)
+		{
+			if (nums.Count > 0)
+			{
+				while (nums.Count > 0 && arr[i] > nums.Peek().Item1)
+				{
+					nums.Pop();
+				}
+
+				int index = nums.Count > 0 ? nums.Peek().Item2 : -1;
+				greaterHolder[k++] = index;
+			}
+			else
+			{
+				greaterHolder[k++] = -1;
+			}
+
+			nums.Push(new Tuple<int, int>(arr[i], i));
+		}
+
+		//
+		for(int i=0;i< arr.Length;i++)
+		{
+			int counter = greaterHolder[i];
+			if(counter < 0)
+			{
+				count[i] = 1;
+			}
+			else
+			{
+				count[i] = (i - counter);
+			}
+			Console.Write(arr[i].ToString() + "=>");
+			Console.WriteLine(count[i]);
+		}
+	}
+}
