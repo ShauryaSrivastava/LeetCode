@@ -1,0 +1,46 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		
+		//Left Push
+		int[] arr = {1, 2, 3, 4, 5, 6, 7};
+		Reverse(arr,0,1);
+		foreach(var x in arr)
+		{
+			Console.Write($" {x} ");
+		}
+		Console.WriteLine();
+		Reverse(arr,2,6);
+		foreach(var x in arr)
+		{
+			Console.Write($" {x} ");
+		}
+		Console.WriteLine();
+		Reverse(arr,0,6);
+		foreach(var x in arr)
+		{
+			Console.Write($" {x} ");
+		}
+		Console.WriteLine();
+		
+	}
+	
+	public static void Reverse(int[] arr,int l,int r)
+	{
+		while(l < r)
+		{
+			Swap(arr,l,r);
+			l++;
+			r--;
+		}
+	}
+	public static void Swap(int[] arr,int l,int r)
+	{
+		int temp = arr[l];
+		arr[l] = arr[r];
+		arr[r]=temp;
+	}
+}
