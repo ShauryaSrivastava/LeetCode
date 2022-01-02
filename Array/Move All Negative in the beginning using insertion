@@ -1,0 +1,35 @@
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+		int[] arr = {-12, 11, -13, -5, 6, 5, -3, -6};
+		//            0    1   2    3  4  5  6    7
+		int pos =0;
+		for (int i = 0; i < arr.Length; i++)
+		{
+			if(arr[i]<0)
+			{
+				Shift(arr,pos,i);
+				pos++;
+			}
+		}
+		foreach(var ele in arr)
+		{
+			Console.WriteLine($" {ele} ");
+		}
+	}
+	public static void Shift(int[] arr,int low,int high)
+	{
+		int temp = arr[high];
+		while(high > low)
+		{
+			arr[high] = arr[high-1];
+			high--;
+		}
+		arr[low] = temp;
+		
+	}
+	
+}
