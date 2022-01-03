@@ -1,0 +1,143 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	public static void Main()
+	{
+		int? [] arr = {50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, 80, null, null};
+		Node head = PreOrderTree(arr);
+		//Display(head);
+		Console.WriteLine($"Size => {Size(head)}");
+		Console.WriteLine($"Height => {Height(head)}");
+		Console.WriteLine($"Sum => {Sum(head)}");
+		Console.WriteLine($"Max => {Max(head)}");
+		Traversal(head);
+		
+	}
+
+	public class Node
+	{
+		public int? Values;
+		public Node Right;
+		public Node Left;
+		public Node(int? _values, Node _right = null, Node _left = null)
+		{
+			Values = _values;
+			Right = _right;
+			Left = _left;
+		}
+	}
+
+	public class Pair
+	{
+		public Node NodeElement;
+		public int state;
+		public Pair(Node _node, int _state)
+		{
+			NodeElement = _node;
+			state = _state;
+		}
+	}
+	public static void Traversal(Node head)
+	{
+		if(head == null) return;
+		Console.WriteLine($"PreOrder : {head.Values}");
+		Traversal(head.Left);
+		Console.WriteLine($"InOrder : {head.Values}");
+		Traversal(head.Right);
+		Console.WriteLine($"PostOrder : {head.Values}");
+	}
+
+	public static void Display(Node _head)
+	{
+		if (_head == null)
+			return;
+		int left = _head.Left != null ? _head.Left.Values ?? -1 : -1;
+		int right = _head.Right != null ? _head.Right.Values ?? -1 : -1;
+		Console.WriteLine($"{left} <-> {_head.Values} <-> {right}");
+		Display(_head.Left);
+		Display(_head.Right);
+	}
+
+	public static int Size(Node head)
+	{
+		if (head == null)
+			return 0;
+		int _ls = Size(head.Left);
+		int _rs = Size(head.Right);
+		return _ls + _rs + 1;
+	}
+	public static int Height(Node head)
+	{
+		if (head == null)
+			return 0;
+		int l = Height(head.Left);
+		int r = Height(head.Right);
+		return Math.Max(l, r) + 1;
+	}
+	public static int Sum(Node head)
+	{
+		if(head == null) return 0;
+		int left = Sum(head.Left);
+		int right = Sum(head.Right);
+		return left + right + head.Values??0;
+	}
+	public static int Max(Node head)
+	{
+		if(head == null) return 0;
+		int left = Max(head.Left);
+		int right = Max(head.Right);
+		int lrmax = Math.Max(left,right);
+		return Math.Max(lrmax,head.Values??0);
+	}
+
+	public static Node PreOrderTree(int? [] arr)
+	{
+		Stack<Pair> stack = new Stack<Pair>();
+		int idx = 0;
+		Node rtp = new Node(arr[0]);
+		stack.Push(new Pair(rtp, 1));
+		while (stack.Count > 0)
+		{
+			var top = stack.Peek();
+			//Console.WriteLine($"{top.NodeElement.Values}");
+			if (top.state == 1)
+			{
+				idx++;
+				if (arr[idx] != null)
+				{
+					top.NodeElement.Left = new Node(arr[idx]);
+					stack.Push(new Pair(top.NodeElement.Left, 1));
+				}
+				else
+				{
+					top.NodeElement.Left = null;
+				}
+
+				top.state++;
+			}
+			else if (top.state == 2)
+			{
+				idx++;
+				if (arr[idx] != null)
+				{
+					top.NodeElement.Right = new Node(arr[idx]);
+					stack.Push(new Pair(top.NodeElement.Right, 1));
+				}
+				else
+				{
+					top.NodeElement.Right = null;
+				}
+
+				top.state++;
+			}
+			else
+			{
+				stack.Pop();
+			}
+		}
+
+		return rtp;
+	}
+}
