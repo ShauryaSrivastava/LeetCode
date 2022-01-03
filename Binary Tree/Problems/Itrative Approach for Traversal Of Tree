@@ -1,0 +1,38 @@
+public static void IttrativeTraversal(Node head)
+	{
+		Stack<Pair> st = new Stack<Pair>();
+		string preorder = string.Empty;
+		string inorder = string.Empty;
+		string postorder = string.Empty;
+		st.Push(new Pair(head,1));
+		while(st.Count > 0)
+		{
+			var top = st.Peek();
+			if(top.state == 1)
+			{
+				preorder = string.Concat($"{preorder} {top.NodeElement.Values}");
+				if(top.NodeElement.Left != null)
+				{
+					st.Push(new Pair(top.NodeElement.Left,1));
+				}
+				top.state++;
+			}
+			else if(top.state == 2)
+			{
+				inorder = string.Concat($"{inorder} {top.NodeElement.Values}");
+				if(top.NodeElement.Right != null)
+				{
+					st.Push(new Pair(top.NodeElement.Right,1));
+				}
+				top.state++;
+			}
+			else
+			{
+				postorder = string.Concat($"{postorder} {top.NodeElement.Values}");
+				st.Pop();
+			}
+		}
+		Console.WriteLine($"Preorder = {preorder}");
+		Console.WriteLine($"Inorder=   {inorder}");
+		Console.WriteLine($"Postorder= {postorder}");
+	}
