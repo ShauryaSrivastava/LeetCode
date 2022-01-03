@@ -1,0 +1,23 @@
+public static void LevelOrderTraveral(Node head)
+	{
+		Queue<Node> q = new Queue<Node>();
+		q.Enqueue(head);
+		while(q.Count > 0)
+		{
+			int count = q.Count;
+			for(int i=0;i<count;i++)
+			{
+				var node = q.Dequeue();
+				Console.Write($" {node.Values} ");
+				if(node.Left != null)
+				{
+					q.Enqueue(node.Left);
+				}
+				if(node.Right != null)
+				{
+					q.Enqueue(node.Right);
+				}
+			}
+			Console.WriteLine();
+		}
+	}
