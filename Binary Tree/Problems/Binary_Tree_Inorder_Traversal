@@ -1,0 +1,9 @@
+public static List<int> Binary_Tree_Inorder_Traversal(Node head)
+	{
+		List<int> output = new List<int>();
+		if(head == null) return output;
+		output.AddRange(Binary_Tree_Inorder_Traversal(head.Left));
+		output.Add(head.Values??0);
+		output.AddRange(Binary_Tree_Inorder_Traversal(head.Right));
+		return output;
+	}
