@@ -1,0 +1,17 @@
+public static List<int?> NodeToRootPath(Node head,int t)
+	{
+		List<int?> res = new List<int?>();
+		if(head == null) return  new List<int?>();
+		if(head.Values == t) return new List<int?>(){t};
+		
+		if(head.Values < t)
+		{
+			 res = NodeToRootPath(head.Right,t);
+		}
+		else
+		{
+			res = NodeToRootPath(head.Left,t);
+		}
+		res.Add(head.Values);
+		return res;
+	}
