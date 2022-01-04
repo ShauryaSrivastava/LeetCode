@@ -1,0 +1,10 @@
+public static Node Mirror(Node head)
+	{
+		if(head == null) return null;
+		var lr = Mirror(head.Left);
+		var rr = Mirror(head.Right);
+		head.Left = rr;
+		head.Right = lr;
+		return head;
+		
+	}
