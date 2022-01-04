@@ -1,0 +1,18 @@
+/*
+----Dummy Data----------------------------------------------
+int?[] arr ={10,20,40,null,null,60,null,null,30,null,null};
+		Node head = PreOrderTree(arr);
+		int[] result = new int[1];
+		 Diameter(head,result);
+		Console.WriteLine($" {result[0]}");
+*/
+public static int Diameter(Node head,int[] arr)
+	{
+		if(head == null)
+			return 0;
+		int left = Diameter(head.Left,arr);
+		int right = Diameter(head.Right,arr);
+		arr[0] = Math.Max(arr[0],left+right);
+		return 1 + Math.Max(left,right);
+		
+	}
