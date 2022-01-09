@@ -1,0 +1,28 @@
+public static void TopViewOfTree(Node head)
+	{	
+		Dictionary<int,Node> pos = new Dictionary<int,Node>();
+		Queue<Pair> q= new Queue<Pair>();
+		q.Enqueue(new Pair(head,0));
+		while(q.Count > 0)
+		{
+				var top = q.Dequeue();
+				if(!pos.ContainsKey(top.state))
+				{
+					pos.Add(top.state,top.NodeElement);
+				}
+				if(top.NodeElement.Left != null)
+				{
+					q.Enqueue(new Pair(top.NodeElement.Left,top.state - 1));
+				}
+				if(top.NodeElement.Right != null)
+				{
+					q.Enqueue(new Pair(top.NodeElement.Right,top.state + 1));
+				}	
+		}
+		foreach(var ele in pos)
+		{
+			Console.WriteLine($" {ele.Key} {ele.Value.Values} ");
+		}
+		
+		return;
+	}
