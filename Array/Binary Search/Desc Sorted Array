@@ -1,0 +1,28 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		//Search In Descending sorted array
+		int[] arr = {18,17,16,15,14,13,12,11};
+		int num = 12;
+		int low = 0;
+		int high = arr.Length -1;
+		while(low <= high)
+		{
+			int mid = low + (high-low/2);
+			if(arr[mid] == num)
+			{Console.WriteLine(mid); break;}
+			if(arr[mid]>num)
+			{
+				low = mid + 1;
+			}
+			else{
+			high = mid -1;
+			}
+		}
+		//Console.WriteLine($"{ mid }");
+		
+	}
+}
