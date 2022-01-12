@@ -1,0 +1,30 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		//Minimum Difference between element in sorted array
+		int[] arr = {4,6,10};
+		int element = 7;
+		int low =0;
+		int high = arr.Length-1;
+		while(low <= high)
+		{
+			int mid = low + ((high-low)/2);
+			if(arr[mid] == element){
+			Console.WriteLine(mid);
+				break;
+			}
+			if(arr[mid]>element)
+			{
+				high = mid-1;
+			}
+			else if(arr[mid]<element)
+			{
+				low=mid+1;
+			}
+		}
+		Console.WriteLine($"low : {low} And High : {high}, MinDistance : {Math.Min(Math.Abs(element-arr[low]),Math.Abs(element-arr[high]))}");
+	}
+}
