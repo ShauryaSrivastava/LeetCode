@@ -1,0 +1,32 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		int[] arr = {1,2,3,4,6,7};
+		int floor = 5;
+		int low = 0;
+		int high = arr.Length-1;
+		int n = high;
+		int res = int.MinValue;
+		while(low <= high)
+		{
+			int mid = low + ((high-low)/2);
+			if(arr[mid] <= floor && res < arr[mid])
+			{
+				res = arr[mid];
+			}
+			if(arr[mid]>= floor)
+			{
+				high = mid -1;
+			}
+			else if(arr[mid]< floor)
+			{
+				low = mid + 1;
+			}
+		}
+		Console.WriteLine(res);
+		
+	}
+}
