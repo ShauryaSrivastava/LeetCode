@@ -1,0 +1,50 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		int[] arr = {10,20,30,40,50};
+		int start = 0;
+		int end = 0;
+		int res=-1;
+		int tStudent = 2;
+		for(int i =0;i< arr.Length;i++)
+		{
+			start = Math.Max(arr[i],start);
+			end+= arr[i];
+		}
+		while(start<= end)
+		{
+			int mid = start + ((end-start)/2);
+			if(isValid(arr,tStudent,arr.Length,mid))
+			{
+				res = mid;
+				end = mid-1;
+			}else
+			{
+				start = mid +1;
+			}
+			
+		}
+		
+		Console.WriteLine(res);
+	}
+	public static bool isValid(int[] arr,int tStudents,int n,int mid)
+	{
+		int count=1;
+		int sum=0;
+		for(int i=0;i<n;i++)
+		{
+			sum+=arr[i];
+			if(sum > mid)
+			{
+				sum = arr[i];
+				count++;
+			}
+			if(count>tStudents)
+				return false;
+		}
+		return count==tStudents;
+	}
+}
