@@ -1,0 +1,61 @@
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+		int row = 3;
+		int col = 3;
+		var matrix = new int[row, col];
+		int i = 0;
+		int j = 0;
+		int count = 0;
+		while (i < row)
+		{
+			j = 0;
+			while (j < col)
+			{
+				matrix[i, j] = ++count;
+				j++;
+			}
+
+			i++;
+		}
+		Print(matrix,row,col);	
+		int r=0;int c=0;
+		while(r<row)
+		{
+			c=r;
+			while(c < col)
+			{
+				Swap(matrix,r,c);
+				c++;
+			}
+			r++;
+		}
+		Print(matrix,row,col);	
+	}
+	public static void Print(int[,] matrix,int row,int col)
+	{
+		int i=0;
+		int j=0;
+		while (i < row)
+		{
+			j = 0;
+			while (j < col)
+			{
+				Console.Write($" {matrix[i, j]} ");
+				j++;
+			}
+			Console.WriteLine();
+			i++;
+		}
+	}
+	
+	public static void Swap(int[,] arr,int i,int j)
+	{
+		int temp = arr[i,j];
+		arr[i,j] = arr[j,i];
+		arr[j,i] = temp;
+	}
+}
