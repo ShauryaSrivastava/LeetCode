@@ -1,0 +1,113 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	public static void Main()
+	{
+		int row = 4;
+		int col = 4;
+		var matrix = Intialize(row, col);
+		Print(matrix, row, col);
+		Console.WriteLine();
+		foreach (var ele in SpiralInMatrix(matrix))
+		{
+			Console.Write($" {ele} ");
+		}
+
+		Console.WriteLine();
+	}
+
+	public static int[, ] Intialize(int row, int col)
+	{
+		var matrix = new int[row, col];
+		int i = 0;
+		int j = 0;
+		int count = 0;
+		while (i < row)
+		{
+			j = 0;
+			while (j < col)
+			{
+				matrix[i, j] = ++count;
+				j++;
+			}
+
+			i++;
+		}
+
+		return matrix;
+	}
+
+	public static void Print(int[, ] matrix, int row, int col)
+	{
+		int i = 0;
+		int j = 0;
+		while (i < row)
+		{
+			j = 0;
+			while (j < col)
+			{
+				Console.Write($"  {matrix[i, j]}  ");
+				j++;
+			}
+
+			Console.WriteLine();
+			i++;
+		}
+	}
+
+	public static List<int> SpiralInMatrix(int[, ] arr)
+	{
+		List<int> coll = new List<int>();
+		int row = arr.GetLength(0);
+		int col = arr.GetLength(1);
+		int top = 0;
+		int bottom = row - 1;
+		int left = 0;
+		int right = col - 1;
+		int dir = 0;
+		while (top <= bottom && left <= right)
+		{
+			if (dir == 0)
+			{
+				for (int i = left; i <= right; i++)
+				{
+					coll.Add(arr[top, i]);
+				}
+
+				top++;
+			}
+			else if (dir == 1)
+			{
+				for (int i = top; i <= bottom; i++)
+				{
+					coll.Add(arr[i, right]);
+				}
+
+				right--;
+			}
+			else if (dir == 2)
+			{
+				for (int i = right; i >= left; i--)
+				{
+					coll.Add(arr[bottom,i]);
+				}
+
+				bottom--;
+			}
+			else if (dir == 3)
+			{
+				for (int i = bottom; i >= top; i--)
+				{
+					coll.Add(arr[i, left]);
+				}
+				left++;
+			}
+
+			dir = (dir + 1) % 4;
+		}
+
+		return coll;
+	}
+}
