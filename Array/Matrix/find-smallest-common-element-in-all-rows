@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+					
+public class Program
+{
+	public static void Main()
+	{
+		int[][] mat = {
+			new int[]{1, 2, 1, 4, 8},
+            new int[]{3, 7, 8, 5, 1},
+            new int[]{8, 7, 7, 3, 1},
+            new int[] {8, 1, 2, 7, 9},
+            };
+		Dictionary<int,int> values = new Dictionary<int,int>();
+		int col = mat[0].GetLength(0);
+		int row = mat.GetLength(0);
+		int min = int.MaxValue;
+		for(int i=0;i< col;i++)
+		{
+			if(!values.ContainsKey(mat[0][i])) values.Add(mat[0][i],1);
+		}
+		for(int i =0;i<row;i++)
+		{
+			for(int j=0;j<col;j++)
+			{
+				if(values.ContainsKey(mat[i][j]))
+				{
+					if(values[mat[i][j]]==i)
+					{
+						values[mat[i][j]]++;
+					}
+					if(values[mat[i][j]]== (col-1))
+					{
+						min = Math.Min(mat[i][j],min);
+						Console.WriteLine($" {mat[i][j]} ");
+					}
+				}
+			}
+		}
+		Console.WriteLine($"Minimum : {min}");
+		
+	}
+}
