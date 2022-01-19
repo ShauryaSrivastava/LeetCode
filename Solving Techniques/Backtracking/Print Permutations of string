@@ -1,0 +1,36 @@
+
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		string s = "abc";
+		PrintPermutation(s,0,s.Length -1);
+	}
+	public static void PrintPermutation(string s,int left,int right)
+	{
+		if(left == right)
+		{
+			Console.WriteLine($" {s} ");
+			return;
+		}
+		for(int i=left;i<=right;i++)
+		{
+			//do
+			s = Swap(s,left,i);
+			//recursive
+			PrintPermutation(s,left+1,right);
+			//undo
+			s = Swap(s,left,i);
+		}
+	}
+	public static string Swap(string str,int i,int j)
+	{
+		char[] arr = str.ToCharArray();
+		char t = arr[i];
+		arr[i] = arr[j];
+		arr[j] = t;
+		return new string(arr);
+	}
+}
