@@ -1,0 +1,96 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		var board = new int[4][];
+		board[0]= new int[]{0,0,0,0};
+		board[1]= new int[]{0,0,0,0};
+		board[2]= new int[]{0,0,0,0};
+		board[3]= new int[]{0,0,0,0};
+		NQueenProblem(board,0,0,0,4,string.Empty);
+
+	}
+	public static void NQueenProblem(int[][] board,int row,int col,int placedQueen,int Queens , string path)
+	{
+		if(placedQueen == Queens)
+		{
+			Console.WriteLine($"Cordinates : {path} ");
+		}
+		for(int i=row;i< board.Length;i++){
+			for(int j=0;j< board[0].Length;j++){
+				//Console.WriteLine($" Trial {placedQueen} : {i} {j} ");
+				if(isValid(board,i,j))
+				{
+					//Console.WriteLine($"placedQueen : {placedQueen + 1} Check row {i} col {j}");
+					board[i][j] = 1;
+					NQueenProblem(board,i,j,(placedQueen+1),Queens,string.Concat(path,$" [{i} : {j}] "));
+					board[i][j] = 0;
+				}
+			}
+		}
+	}
+	public static bool isValid(int[][] board,int row,int column)
+	{
+		
+		int left = column;
+		while(left>=0)
+		{
+			if(board[row][left] == 1)
+				return false;
+			left--;
+		}
+		int right = column;
+		while(right < board[0].Length)
+		{
+			if(board[row][right] == 1)
+				return false;
+			right++;
+		}
+		int up = row;
+		while(up >= 0)
+		{
+			if(board[up][column] == 1)
+				return false;
+			up--;
+		}
+		int dRR = row;
+		int dRC = column;
+		while(dRR>=0 && dRC<board[0].Length)
+		{
+			if(board[dRR][dRC]==1)
+				return false;
+			dRR--;
+			dRC++;
+		}
+		int dLR = row;
+		int dLC = column;
+		while(dLR < board.Length && dLC >=0)
+		{
+			if(board[dLR][dLC]==1)
+				return false;
+			dLR++;
+			dLC--;
+		}
+		int LDRR= row;
+		int LDRC= column;
+		while(LDRR >=0 && LDRC >=0)
+		{
+			if(board[LDRR][LDRC] == 1)
+				return false;
+			LDRR--;
+			LDRC--;
+		}
+		int RDRR= row;
+		int RDRC= column;
+		while(RDRR < board.Length && RDRC < board[0].Length)
+		{
+			if(board[RDRR][RDRC] == 1)
+				return false;
+			RDRR++;
+			RDRC++;
+		}
+		return true;
+	}
+}
