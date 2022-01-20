@@ -1,0 +1,72 @@
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+		var board = new int[4][];
+		var visit = new bool[4][];
+		for (int i = 0; i < 4; i++)
+		{
+			visit[i] = new bool[4]{false, false, false, false};
+		}
+
+		board[0] = new int[4]{1, 0, 0, 0};
+		board[1] = new int[4]{1, 1, 0, 1};
+		board[2] = new int[4]{1, 1, 0, 0};
+		board[3] = new int[4]{0, 1, 1, 1};
+		Console.WriteLine(board[0].Length);
+		Console.WriteLine(board.Length);
+		RatMaze(board, visit, 0, 0, "");
+	}
+
+	public static void RatMaze(int[][] board, bool[][] isVisited, int row, int col, string s)
+	{
+		if(board[row][col] == 0) return;
+		if (row == (board[0].Length - 1) && col == (board.Length - 1))
+		{
+			Console.WriteLine($"Path : {s}");
+			return;
+		}
+
+		//Down
+		if (CanGo(board, isVisited, row + 1, col,"D"))
+		{
+			isVisited[row][col] = true;
+			RatMaze(board, isVisited, row + 1, col, s + "D");
+		}
+
+		//Left
+		if (CanGo(board, isVisited, row, col-1,"L"))
+		{
+			isVisited[row][col] = true;
+			RatMaze(board, isVisited, row, col-1, s + "L");
+		}
+
+		//Right
+		if (CanGo(board, isVisited, row, col + 1,"R"))
+		{
+			isVisited[row][col] = true;
+			RatMaze(board, isVisited, row, col + 1, s + "R");
+		}
+
+		//UP
+		if (CanGo(board, isVisited, row-1, col,"U"))
+		{
+			isVisited[row][col] = true;
+			RatMaze(board, isVisited, row-1, col, s + "U");
+		}
+
+		isVisited[row][col] = false;
+	}
+
+	public static bool CanGo(int[][] board, bool[][] isVisited, int row, int col,string dir)
+	{
+		int minRow = -1;
+		int minCol = -1;
+		int maxRow = board.Length;
+		int maxCol = board[0].Length;
+		//Console.WriteLine($"R : {row} Col : {col} Dir {dir} = Condition {(row > minRow && col > minCol && col < maxCol && row < maxRow && !isVisited[row][col] && (board[row][col] != 0))}");
+		return (row > minRow && col > minCol && col < maxCol && row < maxRow && !isVisited[row][col] && (board[row][col] != 0));
+	}
+}
