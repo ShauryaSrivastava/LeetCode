@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+	public static void Main()
+	{
+		HashSet<string> dict = new HashSet<string>()
+		{
+			"micro","soft","hi","ring","hiring","microsoft"
+		};
+		string word = "microsofthiring";
+		//Console.WriteLine(word.Substring(0,1));
+		WordBreaker(word,"",dict);
+	}
+
+	//Word breaker
+	public static void WordBreaker(string str, string ans, HashSet<string> dic)
+	{
+		//Console.WriteLine(str);
+		if (str.Length == 0)
+		{
+			Console.WriteLine(ans);
+			return;
+		}
+
+		for (int i = 0; i < str.Length; i++)
+		{
+			string word = str.Substring(0, i+1);
+			if (dic.Contains(word))
+			{
+				string right = str.Substring(i+1,str.Length-(i+1));	
+				WordBreaker(right, $"{ans} {word}", dic);
+			}
+		}
+	}
+}
