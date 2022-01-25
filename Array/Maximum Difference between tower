@@ -1,0 +1,17 @@
+var arr = new int[]{3, 9, 12, 16, 20};
+		Array.Sort(arr);
+		int k = 3;
+		int smallest = arr[0] + k;
+		int largest = arr[arr.Length - 1] - k;
+		int min=0;
+		int max=0;
+		int ans =int.MaxValue;
+		for(int i=1;i < arr.Length ;i++)
+		{
+			min = Math.Min(smallest,arr[i-1]+k);
+			max = Math.Max(largest,arr[i]-k);
+			Console.WriteLine($"smallest : {min} largest : {max}");
+			if(min >0)
+				ans = Math.Min(ans,min-max);
+		}
+		Console.WriteLine(Math.Abs(ans));
