@@ -1,0 +1,23 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		var arr = new int[]{1,8,6,2,5,4,8,3,7};
+		int max =0;
+		int l =0;
+		int r = arr.Length -1;
+		while(l<r)
+		{
+			int lh = arr[l];
+			int rh = arr[r];
+			int min_h = Math.Min(lh,rh);
+			max = Math.Max(max,min_h * (r-l));
+			if(lh> rh) r--;
+			else
+				l++;
+		}
+		Console.WriteLine(max);
+	}
+}
