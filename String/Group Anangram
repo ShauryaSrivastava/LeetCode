@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;				
+public class Program
+{
+	public static void Main()
+	{
+		var strArr = new string[]{"eat","tea","tan","ate","nat","bat"};
+		var dic = new Dictionary<string,List<string>>();
+		List<IList<string>> res = new List<IList<string>>();
+		foreach(var str in strArr)
+		{
+			char[] charX = str.ToCharArray();
+			Array.Sort(charX);
+			string _s =String.Join("",charX);
+			if(!dic.ContainsKey(_s))
+			{
+				dic.Add(_s,new List<string>(){str});
+			}
+			else{
+				dic[_s].Add(str);
+			}
+		}
+		foreach(var ele in dic.Values)
+		{
+			res.Add(ele);
+		}
+		
+	}
+}
