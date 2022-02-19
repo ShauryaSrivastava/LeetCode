@@ -1,0 +1,38 @@
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+		//https://www.geeksforgeeks.org/smallest-element-greater-than-x-not-present-in-the-array/
+		var arr = new int[]{1, 5, 10, 4, 7};
+		int X = 4;
+		int n = arr.Length;
+		Array.Sort(arr);
+		int low=0;
+		int high = n - 1;
+		foreach(var num in arr)
+		{
+			Console.Write($"{num} ");
+		}
+		Console.WriteLine();
+		while(low <= high)
+		{
+			int mid = low + ((high-low)/2);
+			Console.Write($"{mid} ");
+			if(arr[mid]<= X){
+				if(arr[mid] == X)
+				{
+					X++;
+					high = n -1;
+				}
+				low = mid +1;
+			}else{
+				high = mid -1;
+			}
+		}
+		Console.WriteLine(X);
+		//1,4,5,7,10
+		
+	}
+}
