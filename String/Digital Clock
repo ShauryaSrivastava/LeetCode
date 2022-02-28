@@ -1,0 +1,17 @@
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+		Console.WriteLine(convert_to_string(1180));
+	}
+
+	public static string convert_to_string(int number)
+	{
+		int hour = number / 60;
+		int minutes = number % 60;
+		string min = minutes.ToString().Length == 1 ? string.Concat("0", minutes.ToString()) : minutes.ToString();
+		return $"{hour}:{min}";
+	}
+}
