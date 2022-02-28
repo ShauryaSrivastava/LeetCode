@@ -1,0 +1,30 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		string normalise = "This iS sO mUCH fUN!";
+		int len = normalise.Length -1;
+		string finalString = "";
+		for(int i= len;i>0;i--)
+		{
+			if(char.IsLetter(normalise[i]))
+			{
+				if(normalise[i-1] == ' ')
+				{
+					finalString = string.Concat(Char.ToUpper(normalise[i]),finalString);
+				}
+				else{
+					finalString = string.Concat(Char.ToLower(normalise[i]),finalString);
+				}
+			}
+			if(!char.IsLetter(normalise[i]))
+				finalString = string.Concat(normalise[i],finalString);
+		}
+		string firstWord = char.IsLetter(normalise[0])? Char.ToUpper(normalise[0]).ToString() : normalise[0].ToString();
+		finalString = string.Concat(firstWord,finalString);
+		
+		Console.WriteLine(finalString);
+	}
+}
