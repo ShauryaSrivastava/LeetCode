@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+public class Program
+{
+	public static void Main()
+	{
+		string variable =  "aabcb";
+		Dictionary<char,int> dic = new Dictionary<char,int>();
+		int i=0;
+		int j=0;
+		int max = int.MinValue;
+		int n = variable.Length;
+		while(j< n)
+		{
+			if(!dic.ContainsKey(variable[j]))
+			{
+				dic.Add(variable[j],j);
+				j++;
+			}
+			else
+			{
+				int current_max = j - i;
+				if(current_max > max)
+				{
+					Console.WriteLine($"{i} : {j-1}");
+					max = Math.Max(current_max,max);
+				}
+
+				i = dic[variable[j]]+1;
+				dic[variable[j]] = j;
+				j++;
+			}
+		}
+		Console.WriteLine(max);
+	}
+}
