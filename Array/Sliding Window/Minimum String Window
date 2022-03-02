@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;				
+public class Program
+{
+	public static void Main()
+	{
+		//string window
+		string s1="fizzbuzz";
+		string s2 ="fuzz";
+		Dictionary<char,int> s2D = new Dictionary<char,int>();
+		Dictionary<char,int> s1D = new Dictionary<char,int>();
+		int actualKeyCount=0;
+		int matchKeyCount=0;
+		int i=0;
+		int j=0;
+		int min = int.MaxValue;
+
+		foreach(var ch in s2)
+		{
+			if(!s2D.ContainsKey(ch)){s2D.Add(ch,1);}
+			else{s2D[ch]++;}
+		}
+		actualKeyCount = s2D.Keys.Count;
+		while(j < s1.Length)
+		{
+			char ch = s1[j];
+			if(!s1D.ContainsKey(ch)){s1D.Add(ch,1);}
+			else{s1D[ch]++;}
+			if(s2D.ContainsKey(ch) && s1D[ch] == s2D[ch])
+			{
+				matchKeyCount++;
+			}
+			while(matchKeyCount == actualKeyCount)
+			{
+				int curr_min = j + 1 - i;
+				min = Math.Min(min,curr_min);
+				char rm = s1[i++];
+				if(s1D.ContainsKey(rm))
+				{
+					s1D[rm]--;
+				}
+				if(s2D.ContainsKey(rm))
+				{
+					if(s1D[rm] < s2D[rm])
+					{
+						matchKeyCount--;	
+					}
+				}
+			}
+			j++;
+		}
+		Console.WriteLine(min);
+		
+	}
+	
+}
