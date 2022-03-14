@@ -1,0 +1,35 @@
+using System;
+using System.Text;
+public class Program
+{
+	public static void Main()
+	{
+		string continous = "abc";
+		Permutation(continous,0,continous.Length-1);
+	}
+	public static void Permutation(string str,int l,int r)
+	{
+		Console.WriteLine($"{str} {l} : {r}");
+		  if (l == r)
+            Console.WriteLine(str);
+        else
+        {
+            for (int i = l; i <= r; i++)
+            {
+                str = swap(str, l, i);
+                Permutation(str, l + 1, r);
+                str = swap(str, l, i);
+            }
+        }
+	}
+	public static String swap(String a,int i, int j)
+    {
+        char temp;
+        char[] charArray = a.ToCharArray();
+        temp = charArray[i] ;
+        charArray[i] = charArray[j];
+        charArray[j] = temp;
+        string s = new string(charArray);
+        return s;
+    }
+}
