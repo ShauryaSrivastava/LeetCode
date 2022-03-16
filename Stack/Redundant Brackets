@@ -1,0 +1,42 @@
+using System;
+using System.Collections;
+
+public class Program
+{
+	public static void Main()
+	{
+		
+		string equation = "((a+b)+(c))";
+		Console.WriteLine(CheckRedundant(equation) ? "Valid" : "InValid");
+	}
+	public static bool CheckRedundant(string parameter)
+	{
+		Stack s = new Stack();
+		foreach (var indiv in parameter)
+		{
+			if (indiv == ')')
+			{
+				bool isValid = false;
+				while ((char)s.Peek() != '(')
+				{
+					if ((char)s.Peek() == '+')
+					{
+						isValid = true;
+					}
+
+					s.Pop();
+				}
+
+				if (!isValid)
+				{
+					return false;
+				}
+			}
+			else
+			{
+				s.Push(indiv);
+			}
+		}
+		return true;
+	}
+}
